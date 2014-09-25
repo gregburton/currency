@@ -50,9 +50,16 @@ class CurrencyTest < Minitest::Test
     assert_equal nil, result_deux
   end
 
-# Should be able to be multiplied by a Fixnum or Float and return a Currency object
+
   def test_can_be_multiplied_by_a_fixnum_or_float_and_return_a_currency_obj
     money = Currency.new(40, "USD")
+    Fixnum = 3
+    float = .1
+    result = money.amount * Fixnum
+    assert_not_nil result
+
+    result_deux = money.amount * float
+    assert_not_nil result_deux
   end
 
 end
