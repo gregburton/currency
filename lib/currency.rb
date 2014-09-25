@@ -1,11 +1,9 @@
 class Currency
   attr_reader: :amount, :code
   def initialize(amount, code)
-
+    @amount = amount
+    @code = code
   end
-
-  @amount = amount
-  @code = code
 
   def ==(other)
     if self.amount == other.amount && self.code == other.code
@@ -20,7 +18,6 @@ class Currency
     end
   end
 
-
   def -(other)
     if self.code != other.code
       raise DifferentCurrencyCodeError, "The codes of these currencies differ. The operation cannot be completed unless they have the same code."
@@ -29,17 +26,21 @@ class Currency
     end
   end
 
-  def mult_fixnum
-    
+# Should be able to be multiplied by a Fixnum or Float and return a Currency object
+  def *(Fixnum)
+    self.amount * Fixnum
   end
 
+  def *(Float)
+    self.amount * Float
+  end
 
+# @rates = { USD 1.0, CAD 1.11}
 
-  # Should be able to be multiplied by a Fixnum or Float and return a Currency object
-
-@rates = { USD 1.0, CAD 1.11}
-
-  # Should be able to take a Currency object and a requested currency code that is the same currency code as the Currency object's and return a Currency object equal to the one passed in (that is, currency_converter.convert(Currency.new(1, :USD), :USD) == Currency.new(1, :USD))
+  # Should be able to take a Currency object and a requested currency code that is the same currency code as the Currency object's and return a Currency object equal to the one passed in
+  # def take_object_and_code
+  #   currency_converter.convert(Currency.new(self.amount, self.code, self.code) == Currency.new(self.amount, self.code))
+  # end
 
   # Should be able to take a Currency object that has one currency code it knows and a requested currency code and return a new Currency object with the right amount in the new currency code
 
